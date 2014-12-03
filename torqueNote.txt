@@ -1,0 +1,40 @@
+/var/spool/torque/server_name 
+  define the server name "node1"
+
+environment variable should be put in /etc/profile
+
+pbsnodes  // show the nodes info
+
+/var/spool/torque/server_priv/nodes
+  node1 np=32
+
+qmgr
+  active server debian
+  create queue quick
+  set queue quick queue_type = Execution         
+  set queue quick Priority = 50                 
+  set queue quick enabled = True
+  set queue quick started = True
+
+  set server scheduling = True
+  set server acl_hosts = node1
+  set server managers = root@node1
+  set server operators = root@node1
+  set server default_queue = batch
+  set server log_events = 511
+  set server mail_from = adm
+  set server scheduler_iteration = 600
+  set server node_check_rate = 150
+  set server tcp_timeout = 6
+  set server mom_job_sync = True
+  set server keep_completed = 3600
+  set server submit_hosts = node1
+  set server next_job_number = 15908
+
+
+
+qmgr
+  print server
+
+
+

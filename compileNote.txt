@@ -1,0 +1,24 @@
+#gcc找到头文件的路径
+C_INCLUDE_PATH=/usr/include/libxml2:/MyLib
+export C_INCLUDE_PATH
+#g++找到头文件的路径
+CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/libxml2:/MyLib
+export CPLUS_INCLUDE_PATH
+#找到动态链接库的路径
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/MyLib
+export LD_LIBRARY_PATH
+#找到静态库的路径
+LIBRARY_PATH=$LIBRARY_PATH:/MyLib
+export LIBRARY_PATH
+
+
+gcc -v a.c // 显示编译信息。如头文件路径。
+
+fortran 编译器也有-I选项
+
+
+VASP:
+1.K点一多、截断能稍高时一进入主循环就“Segementation fault"退出的情况（intel编译器），换了PGI编译器，重新编出来的VASP就OK了，，在FFLAGS中加入了-heap-arrays 64之后，可以算了！论坛里有这方面的讨论，你可以参考一下。
+
+2.要用intel编译器。将makefile.linux_ifort复制为Makefile。修改内容：
+  （1）后面并行部分，FC=mpif90。。。 MKL/BLAS/LAPACK都用intel mkl库中的。
